@@ -1,0 +1,52 @@
+#!/bin/sh
+# performs FDPR instrumentation
+# invocation: fdpr_instr <prog> <arg> ...
+# environment:
+# FDPR_BINDIR -   directory containing fdprpro executable 
+# FDPR_DL_BINDIR - directory containing fdpr_dl  scripts
+# FDPR_SONAME - if present, the shared library to process
+# FDPR_INSTR_FLAGS - instrumentation flags
+# FDPR_OUTPUT_PATH  directory containing instrumented libraries and profiles
+# input:
+# <prog> - input program
+# output:
+# <prog>.instr - instrumented program
+# <prog>.prof - profile file
+# <prog>.prof.orig - a copy of the profile for re-profiling purposes
+# returns:
+# status of instrumentation run
+
+FDPR_ECHO=echo
+if [ "$1" = "--quiet" ]; then
+	FDPR_ECHO=true
+	shift
+fi
+
+FDPR_HIDDEN=$HOME/.fdpr
+mkdir -p $FDPR_HIDDEN
+
+in=$1
+if [ "$FDPR_SONAME" != "" ]; then 
+    in=$FDPR_SONAME; 
+    soname_orig=$FDPR_HIDDEN/`basename "$FDPR_SONAME".orig`
+    if [ ! -r "$soname_orig" ]; then soname_orig="$FDPR_SONAME".orig; fi
+    if ( objdump -t $in | grep FDPRPRO_INSTRUMENTED > /dev/null ); then
+        echo "fdpr_instr: warning: profiling was aborted - resetting original file from its copy" >&2
+        if [ ! -r "$soname_orig" ]; then echo "fdpr_instr: original file is missing, rebuild project" >&2; exit 1; fi
+        cp -p "$soname_orig" "$FDPR_SONAME"
+    fi
+fi
+if [ "$in" = "" -o ! -r "$in" ]; then echo "fdpr_instr: missing or non-existent input program: $in" >&2; exit 1; fi
+if [ "$FDPR_DL_BINDIR" = "" ]; then FDPR_DL_BINDIR=/opt/ibm/fdprpro/bin; fi
+if [ "$FDPR_INSTR_FLAGS" = "" ]; then FDPR_INSTR_FLAGS="-w 2 -q"; fi
+
+$FDPR_ECHO $FDPR_DL_BINDIR/fdpr_dl.py -a instr -p "$in" -f "$in".prof -o "$in".instr $FDPR_INSTR_FLAGS
+$FDPR_DL_BINDIR/fdpr_dl.py -a instr -p "$in" -f "$in".prof -o "$in".instr $FDPR_INSTR_FLAGS
+s=$?
+
+# save original profile for later re-profiling
+saved_prof=$FDPR_HIDDEN/`basename "$in"`.prof
+cp -p "$in".prof "$saved_prof".orig
+cp -p "$in".prof "$saved_prof"
+exit $s
+
