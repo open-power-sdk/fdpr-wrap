@@ -1,0 +1,22 @@
+#!/bin/sh
+# performs FDPR profiling and optimization
+# invocation: fdpr_prof_opt <prog> <arg> ...
+# environment:
+# FDPR_BINDIR - directory containing fdprpro executable and scripts
+# input:
+# <prog>.instr - instrumented program
+# <prog>.prof - profile template
+# <arg> ... - execution arguments
+# output:
+# <prog>.fdpr - optimized program
+# returns:
+# 0 - OK
+# 2 - profiling failed
+# 3 - optimization failed
+if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
+
+$FDPR_BINDIR/fdpr_prof "$@"
+if [ $? != 0 ]; then exit 2; fi
+
+$FDPR_BINDIR/fdpr_opt "$@"
+if [ $? != 0 ]; then exit 3; fi
