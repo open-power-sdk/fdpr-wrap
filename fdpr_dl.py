@@ -64,7 +64,7 @@ if (p_index > -1):
 else:
     bin_name =  argv_list[p_index] 
 	
-bin_name_path = os.path.dirname(bin_name) + "/"
+bin_name_path = os.path.dirname(os.path.abspath(bin_name)) + "/"
 output_path = ' '
 try:  
    output_path = os.environ["FDPR_OUTPUT_PATH"] + "/" 

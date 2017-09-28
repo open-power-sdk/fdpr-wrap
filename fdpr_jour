@@ -27,7 +27,7 @@ mkdir -p $FDPR_HIDDEN
 in=$1
 if [ "$FDPR_SONAME" != "" ]; then in="$FDPR_SONAME"; fi
 if [ "$in" = "" -o ! -r "$in" ]; then echo "fdpr_jour: missing or non-existent input program: $in" >&2; exit 1; fi
-if [ "$FDPR_DL_BINDIR" = "" ]; then FDPR_DL_BINDIR=/opt/ibm/fdprpro/bin; fi
+if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
 if [ "$FDPR_JOUR_FLAGS" = "" ]; then 
   if [ "$FDPR_OPT_FLAGS" = "" ]; then
     FDPR_JOUR_FLAGS="-O3 -w 2 -q"; 
@@ -44,8 +44,8 @@ if [ -r "$saved_prof" ]; then
     prof="$saved_prof"
 fi
 
-$FDPR_ECHO $FDPR_DL_BINDIR/fdpr_dl.py -a opt -p "$in" -j "$in"_jour.xml -f "$view_prof" -o "$in"_jour.fdpr $FDPR_JOUR_FLAGS
-$FDPR_DL_BINDIR/fdpr_dl.py -a opt -p "$in" -j "$in"_jour.xml -f "$prof" -o "$in"_jour.fdpr $FDPR_JOUR_FLAGS
+$FDPR_ECHO $FDPR_BINDIR/fdpr_dl.py -a opt -p "$in" -j "$in"_jour.xml -f "$view_prof" -o "$in"_jour.fdpr $FDPR_JOUR_FLAGS
+$FDPR_BINDIR/fdpr_dl.py -a opt -p "$in" -j "$in"_jour.xml -f "$prof" -o "$in"_jour.fdpr $FDPR_JOUR_FLAGS
 stat=$?
 
 # (YY, 2012/08/09) fix for improper use of </> chars, redundant once fixed fdprpro is out

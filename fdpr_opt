@@ -27,7 +27,7 @@ mkdir -p $FDPR_HIDDEN
 in=$1
 if [ "$FDPR_SONAME" != "" ]; then in="$FDPR_SONAME"; fi
 if [ "$in" = "" -o ! -r "$in" ]; then echo "fdpr_opt: missing or non-existent input program: $in" >&2; exit 1; fi
-if [ "$FDPR_DL_BINDIR" = "" ]; then FDPR_DL_BINDIR=/opt/ibm/fdprpro/bin; fi
+if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
 if [ "$FDPR_OPT_FLAGS" = "" ]; then FDPR_OPT_FLAGS="-O3 -w 2 -q"; fi
 
 # retrieve profile from its save area
@@ -38,5 +38,5 @@ if [ -r "$saved_prof" ]; then
     prof="$saved_prof"
 fi
 
-$FDPR_ECHO $FDPR_DL_BINDIR/fdpr_dl.py -a opt -p "$in" -f "$view_prof" -o "$in".fdpr $FDPR_OPT_FLAGS
-$FDPR_DL_BINDIR/fdpr_dl.py -a opt -p "$in" -f "$prof" -o "$in".fdpr $FDPR_OPT_FLAGS
+$FDPR_ECHO $FDPR_BINDIR/fdpr_dl.py -a opt -p "$in" -f "$view_prof" -o "$in".fdpr $FDPR_OPT_FLAGS
+$FDPR_BINDIR/fdpr_dl.py -a opt -p "$in" -f "$prof" -o "$in".fdpr $FDPR_OPT_FLAGS

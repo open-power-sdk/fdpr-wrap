@@ -15,10 +15,10 @@
 # 2 - profiling failed
 # 3 - journal production failed
 # FDPR_OUTPUT_PATH - directory containing instrumented libraries, profiles and optimized libraries
-if [ "$FDPR_DL_BINDIR" = "" ]; then FDPR_DL_BINDIR=/opt/ibm/fdprpro/bin; fi
+if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
 
-$FDPR_DL_BINDIR/fdpr_dl_prof "$@"
+$FDPR_BINDIR/fdpr_prof "$@"
 if [ $? != 0 ]; then exit 2; fi
 
-$FDPR_DL_BINDIR/fdpr_dl_jour "$@"
+$FDPR_BINDIR/fdpr_jour "$@"
 if [ $? != 0 ]; then exit 3; fi
