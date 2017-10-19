@@ -109,7 +109,8 @@ if [ "$FDPR_CONT_PROGRAM" != "1" ]; then
     done
     cp -p "$start_prof" "$prof"
     # start program
-	cmd=""$prog" "$args""
+	echo $(readlink --canonicalize "$prog")
+	cmd=""$(readlink --canonicalize "$prog")" "$args""
     $FDPR_ECHO "FDPR profiling:" "$cmd" "..."
     # run program in background and save its PID
 	eval "$cmd &"

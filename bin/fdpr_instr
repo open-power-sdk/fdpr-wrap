@@ -3,7 +3,6 @@
 # invocation: fdpr_instr <prog> <arg> ...
 # environment:
 # FDPR_BINDIR -   directory containing fdprpro executable 
-# FDPR_DL_BINDIR - directory containing fdpr_dl  scripts
 # FDPR_SONAME - if present, the shared library to process
 # FDPR_INSTR_FLAGS - instrumentation flags
 # FDPR_OUTPUT_PATH  directory containing instrumented libraries and profiles
@@ -15,6 +14,8 @@
 # <prog>.prof.orig - a copy of the profile for re-profiling purposes
 # returns:
 # status of instrumentation run
+
+if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
 
 FDPR_ECHO=echo
 if [ "$1" = "--quiet" ]; then
@@ -42,11 +43,11 @@ if [ "$FDPR_INSTR_FLAGS" = "" ]; then FDPR_INSTR_FLAGS="-w 2 -q"; fi
 
 $FDPR_ECHO $FDPR_BINDIR/fdpr_dl.py -a instr -p "$in" -f "$in".prof -o "$in".instr $FDPR_INSTR_FLAGS
 $FDPR_BINDIR/fdpr_dl.py -a instr -p "$in" -f "$in".prof -o "$in".instr $FDPR_INSTR_FLAGS
-s=$?
+res=$?
 
 # save original profile for later re-profiling
 saved_prof=$FDPR_HIDDEN/`basename "$in"`.prof
 cp -p "$in".prof "$saved_prof".orig
 cp -p "$in".prof "$saved_prof"
-exit $s
+exit $res
 
