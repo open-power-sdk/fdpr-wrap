@@ -15,6 +15,11 @@
 # returns:
 # status of journal production run
 
+if [ "$FDPR_BINDIR" = "" ]; then
+	FDPR_BINDIR=$(dirname $(which $0))
+	export FDPR_BINDIR
+fi
+
 FDPR_ECHO=echo
 if [ "$1" = "--quiet" ]; then
 	FDPR_ECHO=true
@@ -27,7 +32,6 @@ mkdir -p $FDPR_HIDDEN
 in=$1
 if [ "$FDPR_SONAME" != "" ]; then in="$FDPR_SONAME"; fi
 if [ "$in" = "" -o ! -r "$in" ]; then echo "fdpr_jour: missing or non-existent input program: $in" >&2; exit 1; fi
-if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
 if [ "$FDPR_JOUR_FLAGS" = "" ]; then 
   if [ "$FDPR_OPT_FLAGS" = "" ]; then
     FDPR_JOUR_FLAGS="-O3 -w 2 -q"; 

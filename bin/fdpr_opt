@@ -14,7 +14,10 @@
 # returns:
 # status of optimization run
 
-if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
+if [ "$FDPR_BINDIR" = "" ]; then
+	FDPR_BINDIR=$(dirname $(which $0))
+	export FDPR_BINDIR
+fi
 
 FDPR_ECHO=echo
 if [ "$1" = "--quiet" ]; then

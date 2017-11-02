@@ -5,21 +5,16 @@ import subprocess
 import re
 import os
 
-
-def main(argv):
-    
 #find fdprpro  
- fdpr_file = ' '
 try:  
    fdpr_file = os.environ["FDPR_BINDIR"] + "/fdprpro"
 except KeyError: 
-   fdpr_file = "./fdprpro"
+   fdpr_file = "/opt/ibm/fdprpro/bin/fdprpro"
   
 if not os.path.isfile(fdpr_file):
     print 'define FDPR_BINDIR as path to fdprpro'
     sys.exit()
 
-fdpr_file += " "  
 fdpr_params = ''
 bin_name = ' '
 # read parameters
@@ -44,7 +39,6 @@ fdpr_params = " ".join(argv_list)
 
 #analyze parameters
 def findIndexByParameter(str):
-  index = -1
   try:
     index = argv_list.index(str)
   except ValueError:

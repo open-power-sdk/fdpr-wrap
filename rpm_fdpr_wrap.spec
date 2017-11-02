@@ -9,7 +9,7 @@ URL:		http://www.haifa.il.ibm.com/projects/systems/cot/fdpr/fdpr_linux.html
 Prefix:		/opt/ibm
 Source0:	fdpr_wrap-%{version}.tar.gz
 
-Requires:	fdprpro >= 5.6.1-4 python
+Requires:	fdprpro >= 5.6.1-4 python coreutils which
 
 %description
 FDPR wrapper scripts are used as a glue to facilitate 
