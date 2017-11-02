@@ -22,6 +22,7 @@ fi
 
 FDPR_ECHO=echo
 if [ "$1" = "--quiet" ]; then
+	FDPR_QUIET="--quiet"
 	FDPR_ECHO=true
 	shift
 fi
@@ -49,7 +50,7 @@ if [ -r "$saved_prof" ]; then
 fi
 
 $FDPR_ECHO $FDPR_BINDIR/fdpr_dl.py -a opt -p "$in" -j "$in"_jour.xml -f "$view_prof" -o "$in"_jour.fdpr $FDPR_JOUR_FLAGS
-$FDPR_BINDIR/fdpr_dl.py -a opt -p "$in" -j "$in"_jour.xml -f "$prof" -o "$in"_jour.fdpr $FDPR_JOUR_FLAGS
+$FDPR_BINDIR/fdpr_dl.py $FDPR_QUIET -a opt -p "$in" -j "$in"_jour.xml -f "$prof" -o "$in"_jour.fdpr $FDPR_JOUR_FLAGS
 stat=$?
 
 # (YY, 2012/08/09) fix for improper use of </> chars, redundant once fixed fdprpro is out
