@@ -3,7 +3,7 @@
 # invocation: fdpr_jour <prog> <arg> ...
 # environment:
 # FDPR_DL_BINDIR - directory containing  scripts
-# FDPR_BINDIR - directory containing fdprpro executable 
+# FDPR_BINDIR - directory containing fdprpro executable
 # FDPR_SONAME - if present, the shared library to process
 # FDPR_JOUR_FLAGS - journaling options
 # FDPR_OUTPUT_PATH  directory containing optimized libraries
@@ -32,14 +32,14 @@ mkdir -p $FDPR_HIDDEN
 in=$1
 if [ "$FDPR_SONAME" != "" ]; then in="$FDPR_SONAME"; fi
 if [ "$in" = "" -o ! -r "$in" ]; then echo "fdpr_jour: missing or non-existent input program: $in" >&2; exit 1; fi
-if [ "$FDPR_JOUR_FLAGS" = "" ]; then 
+if [ "$FDPR_JOUR_FLAGS" = "" ]; then
   if [ "$FDPR_OPT_FLAGS" = "" ]; then
-    FDPR_JOUR_FLAGS="-O3 -w 2 -q"; 
+    FDPR_JOUR_FLAGS="-O3 -w 2 -q";
   else
     FDPR_JOUR_FLAGS=$FDPR_OPT_FLAGS
   fi
 fi
-  
+
 # retrieve profile from its save area
 saved_prof=$FDPR_HIDDEN/`basename "$in"`.prof
 prof="$in".prof

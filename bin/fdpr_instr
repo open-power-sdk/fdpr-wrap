@@ -2,7 +2,7 @@
 # performs FDPR instrumentation
 # invocation: fdpr_instr <prog> <arg> ...
 # environment:
-# FDPR_BINDIR -   directory containing fdprpro executable 
+# FDPR_BINDIR -   directory containing fdprpro executable
 # FDPR_SONAME - if present, the shared library to process
 # FDPR_INSTR_FLAGS - instrumentation flags
 # FDPR_OUTPUT_PATH  directory containing instrumented libraries and profiles
@@ -30,8 +30,8 @@ FDPR_HIDDEN=$HOME/.fdpr
 mkdir -p $FDPR_HIDDEN
 
 in=$1
-if [ "$FDPR_SONAME" != "" ]; then 
-    in=$FDPR_SONAME; 
+if [ "$FDPR_SONAME" != "" ]; then
+    in=$FDPR_SONAME;
     soname_orig=$FDPR_HIDDEN/`basename "$FDPR_SONAME".orig`
     if [ ! -r "$soname_orig" ]; then soname_orig="$FDPR_SONAME".orig; fi
     if ( objdump -t $in | grep FDPRPRO_INSTRUMENTED > /dev/null ); then

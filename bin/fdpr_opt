@@ -2,10 +2,10 @@
 # performs FDPR optimization
 # invocation: fdpr_opt <prog> <arg> ...
 # environment:
-# FDPR_BINDIR -   directory containing fdprpro executable 
+# FDPR_BINDIR -   directory containing fdprpro executable
 # FDPR_SONAME - if present, the shared library to process
 # FDPR_OPT_FLAGS - instrumentation flags
-# FDPR_OUTPUT_PATH  directory containing optimized libraries 
+# FDPR_OUTPUT_PATH  directory containing optimized libraries
 # input:
 # <prog> - input program
 # <prog>.prof - profile

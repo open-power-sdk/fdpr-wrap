@@ -3,7 +3,7 @@
 # invocation: fdpr_instr_prof_opt <prog> <arg> ...
 # environment:
 # FDPR_DL_BINDIR - directory containing  scripts
-# FDPR_BINDIR - directory containing fdprpro 
+# FDPR_BINDIR - directory containing fdprpro
 # input:
 # <prog> - input program
 # <arg> ... - execution arguments

@@ -3,7 +3,7 @@
 # invocation: fdpr_prof_jour <prog> <arg> ...
 # environment:
 # FDPR_DL_BINDIR - directory containing fdpr_dl  scripts
-# FDPR_BINDIR -   directory containing fdprpro executable 
+# FDPR_BINDIR -   directory containing fdprpro executable
 # input:
 # <prog>.instr - instrumented program
 # <prog>.prof - profile template
