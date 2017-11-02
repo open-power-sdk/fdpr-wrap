@@ -6,10 +6,10 @@
 # FDPR_SONAME - if present, the shared library to process
 # FDPR_PROF_COMMAND -if present, actual profiling script
 # FDPR_CONT_PROGRAM - if equal to 1, continue the running program
-# FDPR_PROF_DURATION - if equal to integer >0, profile for that amount of time. 
+# FDPR_PROF_DURATION - if equal to integer >0, profile for that amount of time.
 #     Otherwise, profile until completion
 # FDPR_CONT_PROFILING - if equal to 1, continue with profile from last session.
-#     Otherwise, restart with empty profile                  
+#     Otherwise, restart with empty profile
 # input:
 # <prog>.instr - instrumented program
 # <prog>.prof - profile template
@@ -53,9 +53,9 @@ shift
 #args=$*
 args=
 
-while (( "$#" )); do 
+while (( "$#" )); do
   args+="'$1' "
-  shift 
+  shift
 done
 
 if [ "$FDPR_LIBDIR" = "" ]; then FDPR_LIBDIR=/opt/ibm/fdprpro/lib; fi
@@ -64,7 +64,7 @@ export LD_LIBRARY_PATH=$FDPR_LIBDIR:$LD_LIBRARY_PATH
 # determine executable
 prof="$in".prof
 saved_prof=$FDPR_HIDDEN/`basename "$in"`.prof
-if [ "$FDPR_SONAME" != "" ]; then 
+if [ "$FDPR_SONAME" != "" ]; then
     soname_orig=$FDPR_HIDDEN/`basename "$FDPR_SONAME"`.orig
     prof="$FDPR_SONAME".prof
     saved_prof=$FDPR_HIDDEN/`basename "$FDPR_SONAME"`.prof
@@ -117,7 +117,7 @@ if [ "$FDPR_CONT_PROGRAM" != "1" ]; then
     #"$prog" $args &
     prog_pid=$(get_pidn $(basename "$prog"))
     echo $prog_pid > "$saved_pid"
-else 
+else
     # continue profiling a running program but make sure we have its pid
     prog_pid=`cat "$saved_pid"`
     if [ "$prog_pid" = "" ]; then
@@ -129,7 +129,7 @@ else
         exit 1
     fi
     # setup profile
-    send_ptree STOP $prog_pid # setup profile 
+    send_ptree STOP $prog_pid # setup profile
     cp -p "$start_prof" "$prof"
     send_ptree CONT $prog_pid
 fi
@@ -160,7 +160,7 @@ fi
 cp -p "$prof" "$saved_prof"
 send_ptree CONT $prog_pid  # in case program is still running
 
-if [ "$FDPR_SONAME" != "" ]; then 
+if [ "$FDPR_SONAME" != "" ]; then
     # reset shared library to its original version
     cp -p "$soname_orig" "$FDPR_SONAME"
     rm  "$soname_orig"
@@ -170,7 +170,7 @@ if [ "$stat" != "0" ]; then
 fi
 # check if profile was filled
 empty=`(od -Ax -tx4 "$saved_prof" | head -4 | tail -1 |awk '{ print $4 }') 2>/dev/null`
-if [ "$empty" = "00000000" ]; then 
+if [ "$empty" = "00000000" ]; then
     exit 0 # profile is not empty
 else
     exit 1

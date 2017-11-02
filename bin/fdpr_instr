@@ -2,7 +2,7 @@
 # performs FDPR instrumentation
 # invocation: fdpr_instr <prog> <arg> ...
 # environment:
-# FDPR_BINDIR -   directory containing fdprpro executable 
+# FDPR_BINDIR -   directory containing fdprpro executable
 # FDPR_SONAME - if present, the shared library to process
 # FDPR_INSTR_FLAGS - instrumentation flags
 # FDPR_OUTPUT_PATH  directory containing instrumented libraries and profiles
@@ -15,7 +15,10 @@
 # returns:
 # status of instrumentation run
 
-if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
+if [ "$FDPR_BINDIR" = "" ]; then
+	FDPR_BINDIR=$(dirname $(which $0))
+	export FDPR_BINDIR
+fi
 
 FDPR_ECHO=echo
 if [ "$1" = "--quiet" ]; then
@@ -27,8 +30,8 @@ FDPR_HIDDEN=$HOME/.fdpr
 mkdir -p $FDPR_HIDDEN
 
 in=$1
-if [ "$FDPR_SONAME" != "" ]; then 
-    in=$FDPR_SONAME; 
+if [ "$FDPR_SONAME" != "" ]; then
+    in=$FDPR_SONAME;
     soname_orig=$FDPR_HIDDEN/`basename "$FDPR_SONAME".orig`
     if [ ! -r "$soname_orig" ]; then soname_orig="$FDPR_SONAME".orig; fi
     if ( objdump -t $in | grep FDPRPRO_INSTRUMENTED > /dev/null ); then
@@ -38,7 +41,6 @@ if [ "$FDPR_SONAME" != "" ]; then
     fi
 fi
 if [ "$in" = "" -o ! -r "$in" ]; then echo "fdpr_instr: missing or non-existent input program: $in" >&2; exit 1; fi
-if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
 if [ "$FDPR_INSTR_FLAGS" = "" ]; then FDPR_INSTR_FLAGS="-w 2 -q"; fi
 
 $FDPR_ECHO $FDPR_BINDIR/fdpr_dl.py -a instr -p "$in" -f "$in".prof -o "$in".instr $FDPR_INSTR_FLAGS

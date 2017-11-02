@@ -3,7 +3,7 @@
 # invocation: fdpr_instr_prof_opt <prog> <arg> ...
 # environment:
 # FDPR_DL_BINDIR - directory containing  scripts
-# FDPR_BINDIR - directory containing fdprpro 
+# FDPR_BINDIR - directory containing fdprpro
 # input:
 # <prog> - input program
 # <arg> ... - execution arguments
@@ -15,7 +15,10 @@
 # 2 - profiling failed
 # 3 - optimization failed
 # FDPR_OUTPUT_PATH - directory containing instrumented libraries, profiles and optimized libraries
-if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
+if [ "$FDPR_BINDIR" = "" ]; then
+	FDPR_BINDIR=$(dirname $(which $0))
+	export FDPR_BINDIR
+fi
 
 $FDPR_BINDIR/fdpr_instr "$@"
 if [ $? != 0 ]; then exit 1; fi

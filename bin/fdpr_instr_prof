@@ -12,7 +12,10 @@
 # 0 - OK
 # 1 - instrumentation failed
 # 2 - profiling failed
-if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
+if [ "$FDPR_BINDIR" = "" ]; then
+	FDPR_BINDIR=$(dirname $(which $0))
+	export FDPR_BINDIR
+fi
 
 $FDPR_BINDIR/fdpr_instr "$@"
 if [ $? != 0 ]; then exit 1; fi
