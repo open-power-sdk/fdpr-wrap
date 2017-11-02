@@ -19,6 +19,7 @@ if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
 
 FDPR_ECHO=echo
 if [ "$1" = "--quiet" ]; then
+	FDPR_QUIET="--quiet"
 	FDPR_ECHO=true
 	shift
 fi
@@ -42,7 +43,7 @@ if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
 if [ "$FDPR_INSTR_FLAGS" = "" ]; then FDPR_INSTR_FLAGS="-w 2 -q"; fi
 
 $FDPR_ECHO $FDPR_BINDIR/fdpr_dl.py -a instr -p "$in" -f "$in".prof -o "$in".instr $FDPR_INSTR_FLAGS
-$FDPR_BINDIR/fdpr_dl.py -a instr -p "$in" -f "$in".prof -o "$in".instr $FDPR_INSTR_FLAGS
+$FDPR_BINDIR/fdpr_dl.py $FDPR_QUIET -a instr -p "$in" -f "$in".prof -o "$in".instr $FDPR_INSTR_FLAGS
 res=$?
 
 # save original profile for later re-profiling

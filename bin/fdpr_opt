@@ -18,6 +18,7 @@ if [ "$FDPR_BINDIR" = "" ]; then FDPR_BINDIR=/opt/ibm/fdprpro/bin; fi
 
 FDPR_ECHO=echo
 if [ "$1" = "--quiet" ]; then
+	FDPR_QUIET="--quiet"
 	FDPR_ECHO=true
 	shift
 fi
@@ -40,4 +41,4 @@ if [ -r "$saved_prof" ]; then
 fi
 
 $FDPR_ECHO $FDPR_BINDIR/fdpr_dl.py -a opt -p "$in" -f "$view_prof" -o "$in".fdpr $FDPR_OPT_FLAGS
-$FDPR_BINDIR/fdpr_dl.py -a opt -p "$in" -f "$prof" -o "$in".fdpr $FDPR_OPT_FLAGS
+$FDPR_BINDIR/fdpr_dl.py $FDPR_QUIET -a opt -p "$in" -f "$prof" -o "$in".fdpr $FDPR_OPT_FLAGS

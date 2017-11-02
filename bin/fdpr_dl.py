@@ -116,7 +116,7 @@ for line in lddOut.splitlines():
 def ExecuteCmd():
    result = os.system(command_line)
    #print command_line + " " + str(result)
-   if result == 0:
+   if result == 0 and not quiet:
 	  print  command_line + ": SUCCESS"
    return result
 
