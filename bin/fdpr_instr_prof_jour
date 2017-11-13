@@ -1,18 +1,38 @@
 #!/bin/bash
-# performs FDPR instrumentation, profiling and journal production
-# invocation: fdpr_instr_prof_jour <prog> <arg> ...
-# environment:
-# FDPR_BINDIR - directory containing fdprpro executable and scripts
-# input:
-# <prog> - input program
-# <arg> ... - execution arguments
-# output:
-# <prog>-jour.xml - filled profile
-# returns:
-# 0 - OK
-# 1 - instrumentation failed
-# 2 - profiling failed
-# 3 - journal production failed
+
+: '
+  Copyright (C) 2017 IBM Corporation
+  Licensed under the Apache License, Version 2.0 (the “License”);
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an “AS IS” BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Performs FDPR Instrumentation, Profiling and Journal Production
+
+  Invocation: fdpr_instr_prof_jour <prog> <arg> ...
+
+  Environment:
+        FDPR_BINDIR - directory containing fdprpro executable and scripts
+
+  Input:
+        <prog>: input program
+        <arg>: execution arguments
+
+  Output:
+        <prog>-jour.xml: filled profile
+
+  Returns:
+        0 - OK
+        1 - instrumentation failed
+        2 - profiling failed
+        3 - journal production failed
+'
+
 if [ "$FDPR_BINDIR" = "" ]; then
 	FDPR_BINDIR=$(dirname $(which $0))
 	export FDPR_BINDIR

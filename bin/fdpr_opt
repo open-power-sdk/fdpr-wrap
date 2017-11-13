@@ -1,18 +1,35 @@
 #!/bin/sh
-# performs FDPR optimization
-# invocation: fdpr_opt <prog> <arg> ...
-# environment:
-# FDPR_BINDIR -   directory containing fdprpro executable
-# FDPR_SONAME - if present, the shared library to process
-# FDPR_OPT_FLAGS - instrumentation flags
-# FDPR_OUTPUT_PATH  directory containing optimized libraries
-# input:
-# <prog> - input program
-# <prog>.prof - profile
-# output:
-# <prog>.fdpr - instrumented program
-# returns:
-# status of optimization run
+
+: '
+  Copyright (C) 2017 IBM Corporation
+  Licensed under the Apache License, Version 2.0 (the “License”);
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an “AS IS” BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Performs FDPR Optimization
+  
+  Invocation: fdpr_opt <prog> <arg> ...
+
+  Environment:
+                FDPR_BINDIR: directory containing fdprpro executable
+                FDPR_SONAME: if present, the shared library to process
+                FDPR_OPT_FLAGS: instrumentation flags
+                FDPR_OUTPUT_PATH: directory containing optimized libraries
+  Input:
+        <prog>: input program
+        <prog>.prof: profile
+
+  Output:
+        <prog>.fdpr: instrumented program
+
+  Returns: status of optimization run
+'
 
 if [ "$FDPR_BINDIR" = "" ]; then
 	FDPR_BINDIR=$(dirname $(which $0))

@@ -1,20 +1,41 @@
 #!/bin/bash
-# performs FDPR instrumentation, profiling and optimization
-# invocation: fdpr_instr_prof_opt <prog> <arg> ...
-# environment:
-# FDPR_DL_BINDIR - directory containing  scripts
-# FDPR_BINDIR - directory containing fdprpro
-# input:
-# <prog> - input program
-# <arg> ... - execution arguments
-# output:
-# <prog>.fdpr - filled profile
-# returns:
-# 0 - OK
-# 1 - instrumentation failed
-# 2 - profiling failed
-# 3 - optimization failed
-# FDPR_OUTPUT_PATH - directory containing instrumented libraries, profiles and optimized libraries
+
+: '
+  Copyright (C) 2017 IBM Corporation
+  Licensed under the Apache License, Version 2.0 (the “License”);
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+  http://www.apache.org/licenses/LICENSE-2.0
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an “AS IS” BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Performs FDPR Instrumentation, Profiling and Optimization
+  
+  Invocation: fdpr_instr_prof_opt <prog> <arg> ...
+  
+  Environment:
+        FDPR_DL_BINDIR: directory containing  scripts
+        FDPR_BINDIR: directory containing fdprpro
+        FDPR_OUTPUT_PATH: directory containing instrumented libraries, 
+                          profiles and optimized libraries
+  
+  Input:
+        <prog>: input program
+        <arg>: execution arguments
+  
+  Output:
+        <prog>.fdpr: filled profile
+  
+  Returns:
+        0 - OK
+        1 - instrumentation failed
+        2 - profiling failed
+        3 - optimization failed
+'
+
 if [ "$FDPR_BINDIR" = "" ]; then
 	FDPR_BINDIR=$(dirname $(which $0))
 	export FDPR_BINDIR

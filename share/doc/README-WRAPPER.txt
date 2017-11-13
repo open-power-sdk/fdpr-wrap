@@ -4,9 +4,8 @@
 Supplied files and directories
 ------------------------------
 1. share/doc directory
-   README_fdpr_wrap.txt - This file.
-   COPYRIGHT
-   license_files.zip  - license agreements
+   README_WRAPPER - This file.
+   LICENSE
 
 2. bin directory - FDPR wrapper scripts
    fdpr_instr, fdpr_instr_prof, fdpr_instr_prof_opt,

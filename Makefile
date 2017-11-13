@@ -1,3 +1,16 @@
+# 
+# Copyright (C) 2017 IBM Corporation
+# Licensed under the Apache License, Version 2.0 (the “License”);
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# http://www.apache.org/licenses/LICENSE-2.0
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an “AS IS” BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 VER_MJR = 0.1
 VER_MNR = 1
 RELEASE = 8
@@ -14,7 +27,7 @@ tar:	mkdirs $(RPMBUILD_ROOT)/SOURCES/$(TAR).tar.gz
 
 $(RPMBUILD_ROOT)/SOURCES/$(TAR).tar.gz:
 	mkdir -p $(RPMBUILD_ROOT)/$(TAR)
-	cp -a makefile configure bin share $(RPMBUILD_ROOT)/$(TAR)/.
+	cp -a Makefile configure bin share $(RPMBUILD_ROOT)/$(TAR)/.
 	tar -C $(RPMBUILD_ROOT) -czvf $(RPMBUILD_ROOT)/SOURCES/$(TAR).tar.gz $(TAR)
 	rm -rf $(RPMBUILD_ROOT)/$(TAR)
 
@@ -23,9 +36,8 @@ mkdirs:
 
 install:
 	mkdir -p $(DST)/{bin,share/doc}
-	cp -p share/doc/license_files-wrapper.zip $(DST)/share/doc/.
+	cp -p share/doc/LICENSE $(DST)/share/doc/.
 	cp -p share/doc/README-WRAPPER.txt $(DST)/share/doc/.
-	cp -p share/doc/COPYRIGHT-WRAPPER    $(DST)/share/doc/.
 	cp -p bin/fdpr_dl.py $(DST)/bin/.
 	cp -p bin/fdpr_instr $(DST)/bin/.
 	cp -p bin/fdpr_instr_prof $(DST)/bin/.
