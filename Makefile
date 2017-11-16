@@ -27,7 +27,7 @@ tar:	mkdirs $(RPMBUILD_ROOT)/SOURCES/$(TAR).tar.gz
 
 $(RPMBUILD_ROOT)/SOURCES/$(TAR).tar.gz:
 	mkdir -p $(RPMBUILD_ROOT)/$(TAR)
-	cp -a Makefile configure LICENSE README.md bin share $(RPMBUILD_ROOT)/$(TAR)/.
+	cp -a Makefile LICENSE README.md bin $(RPMBUILD_ROOT)/$(TAR)/.
 	tar -C $(RPMBUILD_ROOT) -czvf $(RPMBUILD_ROOT)/SOURCES/$(TAR).tar.gz $(TAR)
 	rm -rf $(RPMBUILD_ROOT)/$(TAR)
 
