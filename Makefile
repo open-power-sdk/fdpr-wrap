@@ -27,7 +27,7 @@ tar:	mkdirs $(RPMBUILD_ROOT)/SOURCES/$(TAR).tar.gz
 
 $(RPMBUILD_ROOT)/SOURCES/$(TAR).tar.gz:
 	mkdir -p $(RPMBUILD_ROOT)/$(TAR)
-	cp -a Makefile configure bin share $(RPMBUILD_ROOT)/$(TAR)/.
+	cp -a Makefile configure LICENSE README.md bin share $(RPMBUILD_ROOT)/$(TAR)/.
 	tar -C $(RPMBUILD_ROOT) -czvf $(RPMBUILD_ROOT)/SOURCES/$(TAR).tar.gz $(TAR)
 	rm -rf $(RPMBUILD_ROOT)/$(TAR)
 
@@ -36,8 +36,8 @@ mkdirs:
 
 install:
 	mkdir -p $(DST)/{bin,share/doc}
-	cp -p share/doc/LICENSE $(DST)/share/doc/.
-	cp -p share/doc/README-WRAPPER.txt $(DST)/share/doc/.
+	cp -p LICENSE $(DST)/.
+	cp -p README.md $(DST)/.
 	cp -p bin/fdpr_dl.py $(DST)/bin/.
 	cp -p bin/fdpr_instr $(DST)/bin/.
 	cp -p bin/fdpr_instr_prof $(DST)/bin/.

@@ -36,8 +36,8 @@ activation of FDPR from IBM SDK for Linux on Power (IDE and CLI)
 make install DESTDIR=%{buildroot}
 
 %files
-%doc %{prefix}/fdprpro/share/doc/README-WRAPPER.txt
-%license %{prefix}/fdprpro/share/doc/LICENSE
+%doc %{prefix}/fdprpro/README.md
+%license %{prefix}/fdprpro/LICENSE
 %prefix/fdprpro/bin/*
 
 %changelog
