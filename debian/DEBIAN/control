@@ -1,0 +1,10 @@
+Package: fdpr-wrap
+Version: 0.1.1-8
+Architecture: ppc64el
+Maintainer: Paul A. Clarke <pc@us.ibm.com>
+Section: devel
+Priority: extra
+Depends: fdprpro, python, debianutils
+Description: FDPR wrapper scripts
+ FDPR wrapper scripts are used as a glue to facilitate use of FDPR
+
