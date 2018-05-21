@@ -18,10 +18,11 @@ VER	= $(VER_MJR).$(VER_MNR)
 TAR	= fdpr_wrap-$(VER)
 DST	= $(DESTDIR)/opt/ibm/fdprpro
 RPMBUILD_ROOT=$(PWD)/rpmbuild
+DEBBUILD_ROOT=$(PWD)/debian
 
-.PHONY:  default tar install package mkdirs clean
+.PHONY:  default tar install rpm deb mkdirs clean
 
-default: package
+default: rpm
 
 tar:	mkdirs $(RPMBUILD_ROOT)/SOURCES/$(TAR).tar.gz
 
@@ -49,9 +50,25 @@ install:
 	cp -p bin/fdpr_opt $(DST)/bin/.
 	cp -p bin/fdpr_jour $(DST)/bin/.
 
-package: mkdirs tar
+rpm: mkdirs tar
 	sed "s|TOPDIR|$(RPMBUILD_ROOT)|g;s|MAJOR|$(VER_MJR)|g;s|MINOR|$(VER_MNR)|g;s|RELEASE|$(RELEASE)|g" rpm_fdpr_wrap.spec > $(TAR).spec
 	rpmbuild -bb --target ppc64le --buildroot $(RPMBUILD_ROOT)/BUILDROOT $(TAR).spec
+
+deb: 
+	mkdir -p debian/$(DST)/bin
+	cp -p LICENSE debian/$(DST)/LICENSE.fdpr-wrap
+	cp -p README.md debian/$(DST)/README.fdpr-wrap.md
+	cp -p bin/fdpr_dl.py debian/$(DST)/bin/.
+	cp -p bin/fdpr_instr debian/$(DST)/bin/.
+	cp -p bin/fdpr_instr_prof debian/$(DST)/bin/.
+	cp -p bin/fdpr_instr_prof_opt debian/$(DST)/bin/.
+	cp -p bin/fdpr_instr_prof_jour debian/$(DST)/bin/.
+	cp -p bin/fdpr_prof debian/$(DST)/bin/.
+	cp -p bin/fdpr_prof_opt debian/$(DST)/bin/.
+	cp -p bin/fdpr_prof_jour debian/$(DST)/bin/.
+	cp -p bin/fdpr_opt debian/$(DST)/bin/.
+	cp -p bin/fdpr_jour debian/$(DST)/bin/.
+	dpkg-deb --build debian debian
 
 clean:
 	rm -rf $(RPMBUILD_ROOT) $(TAR).spec
