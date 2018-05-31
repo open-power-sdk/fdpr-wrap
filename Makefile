@@ -11,9 +11,9 @@
 # limitations under the License.
 #
 
-VER_MJR = 0.1
-VER_MNR = 1
-RELEASE = 8
+VER_MJR = 1.0
+VER_MNR = 0
+RELEASE = 0
 VER	= $(VER_MJR).$(VER_MNR)
 TAR	= fdpr_wrap-$(VER)
 DST	= $(DESTDIR)/opt/ibm/fdprpro
@@ -68,7 +68,7 @@ deb:
 	cp -p bin/fdpr_prof_jour debian/$(DST)/bin/.
 	cp -p bin/fdpr_opt debian/$(DST)/bin/.
 	cp -p bin/fdpr_jour debian/$(DST)/bin/.
-	dpkg-deb --build debian debian
+	dpkg-deb --build debian .
 
 clean:
 	rm -rf $(RPMBUILD_ROOT) $(TAR).spec
