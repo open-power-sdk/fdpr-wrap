@@ -12,7 +12,7 @@
 #
 
 VER_MJR = 1.0
-VER_MNR = 0
+VER_MNR = 1
 RELEASE = 0
 VER	= $(VER_MJR).$(VER_MNR)
 TAR	= fdpr_wrap-$(VER)

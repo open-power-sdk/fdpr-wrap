@@ -1,5 +1,5 @@
 Package: fdpr-wrap
-Version: 1.0.0-0
+Version: 1.0.1-0
 Architecture: ppc64el
 Maintainer: Paul A. Clarke <pc@us.ibm.com>
 Section: devel
