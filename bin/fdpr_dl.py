@@ -17,7 +17,6 @@ limitations under the License.
 '''
 
 import sys
-import getopt
 import subprocess
 import re
 import os
@@ -36,17 +35,9 @@ fdpr_params = ''
 bin_name = ' '
 quiet = False
 
-# read parameters
-try:
-      opts, args = getopt.getopt(sys.argv,"hp:a:")
-except getopt.GetoptError as err:
-      print 'fdpr_dl.py  <fdpr options>'
-      sys.exit()
-for opt, arg in opts:
-    if opt in ("-h", "--help"):
-         print 'fdpr_dl.py <fdpr options> '
-         sys.exit()
-    if opt in ("--quiet"):
+if '--help' in sys.argv or '-h' in sys.argv:
+	print 'fdpr_dl.py <fdpr options>'
+if '--quiet' in sys.argv:
 	quiet = True
 
 argv_list = list(sys.argv)
