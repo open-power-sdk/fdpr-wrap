@@ -34,6 +34,8 @@ if not os.path.isfile(fdpr_file):
 
 fdpr_params = ''
 bin_name = ' '
+quiet = False
+
 # read parameters
 try:
       opts, args = getopt.getopt(sys.argv,"hp:a:")
@@ -44,6 +46,8 @@ for opt, arg in opts:
     if opt in ("-h", "--help"):
          print 'fdpr_dl.py <fdpr options> '
          sys.exit()
+    if opt in ("--quiet"):
+	quiet = True
 
 argv_list = list(sys.argv)
 if (len(argv_list) < 2):
