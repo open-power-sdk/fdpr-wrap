@@ -7,4 +7,5 @@ CMD git clone https://github.com/rpsene/fdpr-wrap.git \
     mkdir ./release \
     mv ./rpmbuild/RPMS/ppc64le/*.rpm ./release \
     cd ./release \
-    alien *.rpm
+    alien *.rpm \
+    ls -la
