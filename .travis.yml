@@ -1,0 +1,13 @@
+language: bash
+
+sudo: required
+
+os: 
+ - linux-ppc64le
+
+services:
+  - docker
+
+script:
+  - docker build .
+  - ls -la
