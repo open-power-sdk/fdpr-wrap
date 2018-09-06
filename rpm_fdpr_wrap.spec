@@ -15,7 +15,7 @@
 %define _topdir TOPDIR
 Name:		fdpr_wrap
 Version:	MAJOR.MINOR
-Release:	RELEASE%{?dist}
+Release:	RELEASE
 Summary:	FDPR wrapper scripts for the IBM SDK for Linux on Power (IDE and CLI)
 License:	Apache 2.0
 URL:		http://www.haifa.il.ibm.com/projects/systems/cot/fdpr/fdpr_linux.html
