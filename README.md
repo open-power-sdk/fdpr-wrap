@@ -1,3 +1,7 @@
+# End of support
+
+The project on which this project depends, IBM Feedback Directed Program Restructuring, is no longer supported on Linux on Power. This project is being archived.
+
 # Project Description
 
 FDPR wrapper scripts
